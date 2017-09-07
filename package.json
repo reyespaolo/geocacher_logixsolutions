@@ -1,0 +1,25 @@
+{
+  "name": "geocacher_logixsolutions",
+  "version": "1.0.0",
+  "description": "Geocacher saves to MongoDB",
+  "main": "geocacher/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reyespaolo/geocacher_logixsolutions.git"
+  },
+  "keywords": [
+    "intexpro"
+  ],
+  "author": "Paolo Brainard M. Reyes <xreyes.paolox@gmail.com> (http://360logix.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reyespaolo/geocacher_logixsolutions/issues"
+  },
+  "homepage": "https://github.com/reyespaolo/geocacher_logixsolutions#readme",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
+}

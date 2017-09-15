@@ -3,6 +3,8 @@ let EventEmitter = require('events').EventEmitter;
 let mongoose = require('mongoose');
 let util = require('util');
 let geocache = require('./geo.model.js');
+const _ = require('lodash');
+
 
 mongoose.Promise = global.Promise;
 
@@ -66,19 +68,26 @@ GeoCacher.prototype.start = function () {
 
 
 GeoCacher.prototype.saveGeoCache = function(geo,cb){
+  var body = _.pick(geo, ['coords','provider','full_address','street_number','street','city','municipality2','municipality','country','countryCode','postal_code']);
+  let Geocache = new geocache(body);
 
   if(this.mode === 'mongodb'){
-
+      Geocache.save()
+      .then((geocache) => {
+        cb(geocache)
+      }).catch((e) => {
+        cb('error')
+      });
   }else if(this.mode === 'redis'){
     cb("REDIS Not Implimented")
   }
 
 }
 
-GeoCacher.prototype.reverseGeoCode = function(latitude,longitude,cb){
+GeoCacher.prototype.reverseGeoCode = function(longitude, latitude,cb){
 
   if(this.mode === 'mongodb'){
-    var point = {
+    var coords = {
             type: "Point",
             coordinates: [longitude, latitude]
         };
@@ -87,7 +96,7 @@ GeoCacher.prototype.reverseGeoCode = function(latitude,longitude,cb){
         maxDistance: this.maxDistance,
         num: this.resultLimit
         };
-    geocache.geoNear(point, geoOptions, function(err, results, stats) {
+    geocache.geoNear(coords, geoOptions, function(err, results, stats) {
         var locations;
         if (err) {
             cb(err)

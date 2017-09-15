@@ -9,15 +9,15 @@ const geoCacher = GeoCacher.initialize({
   'mode'  : 'mongodb',
   'dbURL' : 'mongodb://localhost:27017/logixmapdata',
   'maxDistance': 25, //Required
-  'resultLimit':10 // Optional for Mongo
+  'resultLimit':1 // Optional for Mongo
 
 });
 
 
 geoCacher.on('ready', (status) => {
-  // geoCacher.reverseGeoCode(6.384543, 124.690294, result => {
-  //   console.log(result)
-  // });
+  geoCacher.reverseGeoCode(121.001651, 14.632906, result => {
+    console.log(result)
+  });
 
 
   let reverseGeo = { provider: 'Google',
@@ -30,11 +30,11 @@ geoCacher.on('ready', (status) => {
   country: 'Philippines',
   countryCode: 'PH',
   postal_code: '1114',
-  points: { latitude: 14.632906, longitude: 121.001651 } }
+  coords: [121.001651,14.632906]}
 
-  geoCacher.saveGeoCache(reverseGeo, result => {
-    console.log(result)
-  });
+  // geoCacher.saveGeoCache(reverseGeo, result => {
+  //   console.log(result)
+  // });
 
 })
 

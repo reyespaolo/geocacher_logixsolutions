@@ -3,21 +3,36 @@ const express = require('express');
 const GeoCacher = require('./geocacher');
 let app = express();
 
-process.on('uncaughtException', function(err) {
-  console.log('Caught exception: ' + err);
-});
+
 
 const geoCacher = GeoCacher.initialize({
   'mode'  : 'mongodb',
   'dbURL' : 'mongodb://localhost:27017/logixmapdata',
   'maxDistance': 25, //Required
-  'resultSet':1 // Optional for Mongo
+  'resultLimit':10 // Optional for Mongo
 
 });
 
 
-geoCacher.on('ready', (status) => {//6.381782, 124.689757 //6.384245, 124.690551 //6.384543, 124.690294
-  geoCacher.reverseGeoCode(6.384543, 124.690294, function(result){
+geoCacher.on('ready', (status) => {
+  // geoCacher.reverseGeoCode(6.384543, 124.690294, result => {
+  //   console.log(result)
+  // });
+
+
+  let reverseGeo = { provider: 'Google',
+  full_address: '645 Banawe St, Santa Mesa Heights, Quezon City, 1114 Metro Manila, Philippines',
+  street_number: '645',
+  street: 'Banawe Street',
+  city: 'Quezon City',
+  municipality2: 'Metro Manila',
+  municipality: 'Metro Manila',
+  country: 'Philippines',
+  countryCode: 'PH',
+  postal_code: '1114',
+  points: { latitude: 14.632906, longitude: 121.001651 } }
+
+  geoCacher.saveGeoCache(reverseGeo, result => {
     console.log(result)
   });
 

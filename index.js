@@ -15,7 +15,7 @@ const geoCacher = GeoCacher.initialize({
 
 
 geoCacher.on('ready', (status) => {
-  geoCacher.reverseGeoCode(121.001651, 14.632906, result => {
+  geoCacher.reverseGeoCode(11.001651, 14.632906, result => {
     console.log(result)
   });
 

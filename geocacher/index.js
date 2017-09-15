@@ -101,7 +101,13 @@ GeoCacher.prototype.reverseGeoCode = function(longitude, latitude,cb){
         if (err) {
             cb(err)
         } else {
-            cb(results)
+            if(results.length == 0){
+              cb("No Result")
+
+            }else{
+              cb(results)
+
+            }
         }
     });
   }else if(this.mode === "redis"){

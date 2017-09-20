@@ -16,6 +16,7 @@ var geocacheSchema = mongoose.Schema({
 	   type: [Number],
 	   index: '2dsphere'
 	 },
+   timestamps: true
 });
 
 

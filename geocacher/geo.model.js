@@ -2,7 +2,7 @@
 let mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-var geocacheSchema = mongoose.Schema({
+const geocacheSchema = mongoose.Schema({
   provider: String,
   full_address: String,
   street_number:String,
@@ -21,5 +21,5 @@ var geocacheSchema = mongoose.Schema({
 });
 
 
-var Geocache = mongoose.model('Geocache', geocacheSchema);
+const Geocache = mongoose.model('Geocache', geocacheSchema);
 module.exports = Geocache

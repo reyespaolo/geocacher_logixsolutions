@@ -99,7 +99,7 @@ GeoCacher.prototype.reverseGeoCode = function(longitude, latitude,cb){
     geocache.geoNear(coords, geoOptions, function(err, results, stats) {
         var locations;
         if (err) {
-            cb(err)
+          cb("No Result")
         } else {
             if(results.length == 0){
               cb("No Result")

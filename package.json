@@ -1,6 +1,6 @@
 {
   "name": "geocacher_logixsolutions",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Geocacher saves to MongoDB",
   "main": "geocacher/index.js",
   "scripts": {

@@ -1,4 +1,4 @@
-'use strict';
+`use strict`
 let EventEmitter = require('events').EventEmitter;
 let mongoose = require('mongoose');
 let util = require('util');

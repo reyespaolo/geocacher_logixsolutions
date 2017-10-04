@@ -4,7 +4,6 @@ const GeoCacher = require('./geocacher');
 let app = express();
 
 
-
 const geoCacher = GeoCacher.initialize({
   'mode'  : 'mongodb',
   'dbURL' : 'mongodb://localhost:27017/logixmapdata',

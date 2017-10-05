@@ -73,6 +73,7 @@ GeoCacher.prototype.saveGeoCache = function(geo, cb) {
 
   if (this.mode === 'mongodb') {
     Geocache.save()
+      .then(waitForIndex)
       .then(geocache => cb(geocache))
       .catch(error => cb('error'))
   } else if (this.mode === 'redis') {
@@ -105,6 +106,12 @@ GeoCacher.prototype.reverseGeoCode = function(longitude, latitude, cb) {
   } else if (this.mode === 'redis') {
 
   }
+}
+
+function waitForIndex() {
+  return new Promise((resolve, reject) => {
+    geocache.on('index', error => error ? reject(error) : resolve())
+  })
 }
 
 module.exports = GeoCacher

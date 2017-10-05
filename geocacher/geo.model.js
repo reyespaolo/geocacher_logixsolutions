@@ -1,6 +1,7 @@
 'use strict'
-let mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+let mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const geocacheSchema = mongoose.Schema({
   provider: String,
@@ -16,10 +17,11 @@ const geocacheSchema = mongoose.Schema({
 	coords: {
 	   type: [Number],
 	   index: '2dsphere'
-	 },
-   created_at: { type: Date, default: Date.now },
-});
+	 }
+}, {
+  timestamps: true
+})
 
 
-const Geocache = mongoose.model('Geocache', geocacheSchema);
+const Geocache = mongoose.model('Geocache', geocacheSchema)
 module.exports = Geocache

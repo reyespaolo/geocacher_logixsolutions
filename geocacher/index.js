@@ -77,7 +77,7 @@ GeoCacher.prototype.saveGeoCache = function(geo, callback) {
       .then(geocache => callback(null, geocache))
       .catch(error => callback(error))
   } else if (this.mode === 'redis') {
-    cb("REDIS Not Implemented")
+    callback(new Error('REDIS Not Implemented'))
   }
 }
 

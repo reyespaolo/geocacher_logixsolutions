@@ -14,8 +14,12 @@ const geoCacher = GeoCacher.initialize({
 
 
 geoCacher.on('ready', (status) => {
-  geoCacher.reverseGeoCode(11.001651, 14.632906, result => {
-    console.log(result)
+  geoCacher.reverseGeoCode(121.001651, 14.632906, (error, result) => {
+    if (error) {
+      console.log('reverse', error.message)
+    } else {
+      console.log('reverse', result)
+    }
   });
 
 
@@ -31,9 +35,9 @@ geoCacher.on('ready', (status) => {
   postal_code: '1114',
   coords: [121.001651,14.632906]}
 
-  // geoCacher.saveGeoCache(reverseGeo, result => {
-  //   console.log(result)
-  // });
+  geoCacher.saveGeoCache(reverseGeo, result => {
+    console.log('saveGeoCache', result)
+  });
 
 })
 

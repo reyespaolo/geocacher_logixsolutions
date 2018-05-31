@@ -67,21 +67,21 @@ GeoCacher.prototype.start = function() {
 }
 
 
-GeoCacher.prototype.saveGeoCache = function(geo, cb) {
+GeoCacher.prototype.saveGeoCache = function(geo, callback) {
   var body = _.pick(geo, ['coords', 'provider', 'full_address', 'street_number', 'street', 'city', 'municipality2', 'municipality', 'country', 'countryCode', 'postal_code'])
   let Geocache = new geocache(body)
 
   if (this.mode === 'mongodb') {
     Geocache.save()
       .then(waitForIndex)
-      .then(geocache => cb(geocache))
-      .catch(error => cb('error'))
+      .then(geocache => callback(null, geocache))
+      .catch(error => callback(error))
   } else if (this.mode === 'redis') {
     cb("REDIS Not Implemented")
   }
 }
 
-GeoCacher.prototype.reverseGeoCode = function(longitude, latitude, cb) {
+GeoCacher.prototype.reverseGeoCode = function(longitude, latitude, callback) {
   if (this.mode === 'mongodb') {
     let coords = {
       type: 'Point',
@@ -92,14 +92,14 @@ GeoCacher.prototype.reverseGeoCode = function(longitude, latitude, cb) {
       maxDistance: this.maxDistance,
       num: this.resultLimit
     }
-    geocache.geoNear(coords, geoOptions, function(err, results, stats) {
-      if (err) {
-        cb('No Result')
+    geocache.geoNear(coords, geoOptions, function(error, results, stats) {
+      if (error) {
+        callback(error)
       } else {
         if (results.length == 0) {
-          cb('No Result')
+          callback(new Error('No Result'))
         } else {
-          cb(results)
+          callback(null, results)
         }
       }
     })
